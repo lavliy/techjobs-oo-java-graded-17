@@ -89,5 +89,31 @@ public class Job {
     public void setCoreCompetency(CoreCompetency coreCompetency) {
         this.coreCompetency = coreCompetency;
     }
+    @Override
+    public String toString() {
+        boolean hasData = (getName() != null&&!getName().isEmpty()) ||
+                (getEmployer() != null && !getEmployer().getValue().isEmpty()) ||
+                (getLocation() != null && !getLocation().getValue().isEmpty()) ||
+                (getPositionType() != null && !getPositionType().getValue().isEmpty()) ||
+                (getCoreCompetency() != null && !getCoreCompetency().getValue().isEmpty());
 
+        if (hasData) {
+            String idLabel = "ID: " + getId();
+            String nameLabel = "Name: " + (getName() == null || getName().isEmpty() ? "Data not available" : getName());
+            String employerLabel = "Employer: " + ((getEmployer() == null || getEmployer().getValue() == null || getEmployer().getValue().isEmpty()) ? "Data not available" : getEmployer().getValue());
+            String locationLabel = "Location: " + ((getLocation() == null || getLocation().getValue() == null || getLocation().getValue().isEmpty()) ? "Data not available" : getLocation().getValue());
+            String positionTypeLabel = "Position Type: " + ((getPositionType() == null || getPositionType().getValue() == null || getPositionType().getValue().isEmpty()) ? "Data not available" : getPositionType().getValue());
+            String coreCompetencyLabel = "Core Competency: " + ((getCoreCompetency() == null || getCoreCompetency().getValue() == null || getCoreCompetency().getValue().isEmpty()) ? "Data not available" : getCoreCompetency().getValue());
+
+            return "\n" +
+                    idLabel + "\n" +
+                    nameLabel + "\n" +
+                    employerLabel + "\n" +
+                    locationLabel + "\n" +
+                    positionTypeLabel + "\n" +
+                    coreCompetencyLabel + "\n";
+        } else {
+            return "OOPS! This job does not seem to exist.";
+        }
+    }
 }
